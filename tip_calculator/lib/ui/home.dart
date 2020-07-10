@@ -34,7 +34,7 @@ class _BillSplitterState extends State<BillSplitter> {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text("Total Per Person"),
+                      Text("Total Per Person", style: TextStyle(),),
                       Text("\$230"),
                     ]
                     ),
@@ -56,8 +56,8 @@ class _BillSplitterState extends State<BillSplitter> {
                     keyboardType: TextInputType.numberWithOptions(decimal: true),
                     style: TextStyle(color : _purple),
                     decoration: InputDecoration(
-                      prefixText: "Bill Amount",
-                      prefixIcon: Icon(Icons.attach_money)
+                      prefixText: "Bill Amount : ",
+                      prefixIcon: Icon(Icons.assignment)
                      ),
                      onChanged: (String value){
                        try{
@@ -67,7 +67,83 @@ class _BillSplitterState extends State<BillSplitter> {
                          _billAmount = 0.0;
                        }
                      },
-                  )
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text("Split",
+                      style : TextStyle(
+                        color: Colors.grey.shade700),),
+                        Row(
+                          children: <Widget>[
+                            InkWell(
+                              onTap: (){
+                                setState(() {
+                                  if(_personCounter > 1){
+                                    _personCounter--;
+                                  } else {
+                                    //Do Something
+                                  }
+                                });
+                              },child: Container(
+                                width : 40, 
+                                height : 40,
+                                margin : EdgeInsets.all(10.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(7.0),
+                                  color: _purple.withOpacity(0.1)
+                                ),
+                                child:
+                                 Center(
+                                   child: Text(
+                                    "-",style: TextStyle(
+                                      color : _purple, 
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17.0,
+                                    ),
+                                ),
+                                 ),
+                              ),
+                            ),
+                            Text("$_personCounter",
+                            style: TextStyle(
+                              color : _purple, 
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17.0,
+                            ),
+                            ),
+
+
+                          InkWell(
+                              onTap: (){
+                                setState(() {
+                                  _personCounter++;
+                                });
+                              },child: Container(
+                                width : 40, height : 40,
+                                margin : EdgeInsets.all(10.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(7.0),
+                                  color: _purple.withOpacity(0.1)
+                                ),
+                                child:
+                                 Center(
+                                   child: Text(
+                                    "+",style: TextStyle(
+                                      color : _purple, 
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17.0,
+                                    ),
+                                ),
+                                 ),
+                              ),
+                            ),
+
+
+                        ],
+                        )
+                    ],
+                  ),
 
                 ]
               ),
